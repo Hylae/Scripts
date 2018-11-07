@@ -1,0 +1,30 @@
+```PowerShell
+
+$dias=1
+
+while(1)
+{
+cd C:\
+$fecha=(Get-Date).Year.tostring()+(Get-Date).Month.tostring()+(Get-Date).Day.tostring()
+mkdir $fecha
+cd .\$fecha
+
+    $dias=$dias+1
+
+    if($dias -eq 7)
+    {
+        (ps | select name).name | %{
+    ni -Path $_ -Value ([string](ps -Name $_)) -name informacion.txt -force
+    }
+        break
+    }
+    else
+    {
+        (ps | select name).name | %{
+    ni -Path $_ -Value ([string](ps -Name $_)) -name informacion.txt -force
+    }
+    }
+    Start-Sleep -Seconds (24*60*60)
+}
+
+```
